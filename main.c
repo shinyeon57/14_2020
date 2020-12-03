@@ -3,21 +3,29 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-int main(int argc, char *argv[]) {
+struct Book{
+	int number;
+	char title[20];
+};
+
+void main(void){
+	struct Book *p;
 	
-	char *pc = NULL;
-	int i = 0;
+	p = (struct Book*)malloc(2*sizeof(struct Book));
+
 	
-	pc = (char*)malloc(100*sizeof(char));
-	if(pc == NULL){
+	if(p == NULL){
 		printf("memory allocate error\n");
-		exit(1);
+		return -1;
 	}
 	
-	for(i=0;i<26;i++){
-		pc[i]='a' + i;
-	}
-	pc[i] = 0;
-	printf("%s\n", pc);
-	free(pc);
+	p->number = 1;
+	strcpy(p->title, "C PROGRAMMING");
+	
+	(p+1)->number = 2;
+	strcpy((p+1)->title, "ELECTRONICS");
+	
+	printf("%s %s\n", p->title, (p+1)->title);
+	free(p);
+	return	0;
 }
